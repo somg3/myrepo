@@ -1,0 +1,15 @@
+{
+  "tenantUrl": "https://devrel-ga-21129.api.identitynow-demo.com",
+  "jarName": "sailpoint-file-upload-utility-4.1.0.jar",
+  "sourceDirectory": "Source Input",
+  "temporaryDirectory": "Temperary Files",
+  "sourcesPageSize": 250,
+  "fileStabilityWaitSeconds": 5,
+  "runsToKeep": 90,
+  "javaTimeoutMinutes": 60,
+  "apiRetryCount": 3,
+  "enableSourceDiscoveryLogging": false,
+  "pauseAtEnd": false,
+  "caseSensitiveSourceMatch": false,
+  "objectType": "both"
+}
