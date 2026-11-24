@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <timestamp key="currentTimestamp" datePattern="yyyy-MM-dd_HH-mm-ss"/>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} [loadOperationId=%X{loadOperationId} correlationId=%X{correlationId}] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>logs/isc-load-${currentTimestamp}.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} [loadOperationId=%X{loadOperationId} correlationId=%X{correlationId}] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Append-only structured audit trail (JSON lines). Retain per org policy. -->
+    <appender name="AUDIT_FILE" class="ch.qos.logback.core.FileAppender">
+        <file>logs/isc-load-audit-${currentTimestamp}.ndjson</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- INFO default. ISC HTTP debug prints url, body, and response with secrets redacted. -->
+    <logger name="ezymigrate.sailpoint.isc.api.IscHttpClient" level="DEBUG"/>
+    <logger name="ezymigrate.sailpoint.isc.api.IscOAuthClient" level="DEBUG"/>
+    <root level="DEBUG">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="FILE" />
+    </root>
+
+    <logger name="com.ezymigrate.isc.load.audit.AUDIT" level="INFO" additivity="false">
+        <appender-ref ref="AUDIT_FILE" />
+        <appender-ref ref="CONSOLE" />
+    </logger>
+
+    <logger name="org.apache.http" level="WARN"/>
+    <logger name="org.apache.http.wire" level="WARN"/>
+    <logger name="org.apache.http.headers" level="WARN"/>
+</configuration>
