@@ -28,7 +28,7 @@
     <!-- INFO default. ISC HTTP debug prints url, body, and response with secrets redacted. -->
     <logger name="ezymigrate.sailpoint.isc.api.IscHttpClient" level="DEBUG"/>
     <logger name="ezymigrate.sailpoint.isc.api.IscOAuthClient" level="DEBUG"/>
-    <root level="DEBUG">
+    <root level="INFO">
         <appender-ref ref="CONSOLE" />
         <appender-ref ref="FILE" />
     </root>
